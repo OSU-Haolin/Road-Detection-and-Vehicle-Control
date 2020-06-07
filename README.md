@@ -4,4 +4,6 @@
 #### Latest version:06/06/2020
 <br /><br />
 ##### Update log:06/06/2020
-* Revised evaluation tools (in __devkit_road__)
+* Revised evaluation tools (in __devkit_road__ (from http://www.cvlibs.net/datasets/kitti/eval_road.php))
+
+
