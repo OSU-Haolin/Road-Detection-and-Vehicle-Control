@@ -1,5 +1,5 @@
 # LORD:Lidar-Orientated-Road-Detection
-#### Haolin ZHANG, Xiao LIU, Ruoyang FU
+#### Haolin ZHANG, Xiao LIU, Ruoyang FU, Simeng Huang, Hongwei Jiang
 #### Department of Electrical and Computer Engineering, The Ohio State University
 ##### Latest version:06/12/2020
 
