@@ -1,4 +1,4 @@
-# LORD : Lidar-Orientated-Road-Detection
+# Road Detection and Vehicle Control
 #### Haolin ZHANG, Xiao LIU, Ruoyang FU, Simeng HUANG, Hongwei JIANG
 #### Department of Electrical and Computer Engineering, The Ohio State University
 ##### Latest version:08/05/2020
