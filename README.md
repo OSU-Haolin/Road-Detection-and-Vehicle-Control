@@ -3,7 +3,7 @@
 #### Department of Electrical and Computer Engineering, The Ohio State University
 ##### Latest version:08/11/2020
 
-#### 1.Dataset Setup
+#### 1.Environment and Dataset Setup
 
 Please setup dataset according to the following folder structure:
 ```
@@ -23,8 +23,10 @@ RD
  |    |    |---- calib
 ```
 #### 2.Instruction
+Waiting for update...
 
 #### 3.Demo
+Waiting for update...
 
 #### 4.Update Log
 
