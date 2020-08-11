@@ -1,13 +1,13 @@
 # Road Detection and Vehicle Control
 #### Haolin ZHANG, Xiao LIU, Ruoyang FU, Simeng HUANG, Hongwei JIANG
 #### Department of Electrical and Computer Engineering, The Ohio State University
-##### Latest version:08/05/2020
+##### Latest version:08/11/2020
 
 #### Dataset Setup
 
 Please setup dataset according to the following folder structure:
 ```
-LORD
+RD
  |---- ptsemseg
  |---- outputs
  |---- configs
@@ -27,11 +27,11 @@ LORD
 * Revised evaluation tools (in `devkit_road` (from http://www.cvlibs.net/datasets/kitti/eval_road.php))
 
 ##### Update log:06/10/2020
-* Upload segmentation models (in `LORD`)
+* Upload segmentation models (in `RD`)
 
-##### Updat log:06/12/2020
+##### Update log:06/12/2020
 * Upload Lidar2image tools (in `LIDAR`)
 
-##### Updat log:08/11/2020
+##### Update log:08/11/2020
 * Finish Lidar2image tools (in `LIDAR`)
 
