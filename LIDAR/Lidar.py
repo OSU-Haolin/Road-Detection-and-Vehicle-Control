@@ -4,22 +4,31 @@ import time
 import numpy as np
 from function import find_files, cal_proj_matrix, load_img, load_lidar, project_lidar2img, generate_FV
 from tqdm import tqdm
+import argparse
 import argparse as args
 
 
 def main():
     # parsing arguments
-    # argparser = argparse.ArgumentParser(description='Lidar2image')
-    # argparser.add_argument('--data_path', required=True, help='path to the data dir. See README for detail.')
-    # argparser.add_argument('--out_path_Lidar2img', required=True, help='path of image output')
-    # argparser.add_argument('--out_path_Lidar2FV', required=True, help='path of frontview output')
+    argparser = argparse.ArgumentParser(description='Lidar2image')
+    argparser.add_argument('--data_path', required=True, help='path to the data dir. See README for detail.')
+    argparser.add_argument('--out_path_Lidar2Proj', required=True, help='path of Proj image output')
+    argparser.add_argument('--out_path_Lidar2FV', required=True, help='path of frontview output')
     # argparser.add_argument('--type', required=True, help='Type of Lidar representation.choose: proj, FV, etc')
-    # args = argparser.parse_args()
-    args.data_path='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/dataset/'
-    args.out_path_Lidar2img='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2img/'
-    args.out_path_Lidar2FV = '/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2FV/'
+    args = argparser.parse_args()
+    #############defaut path refer##############
+    # --data_path
+    # .../Road-Detection-and-Vehicle-Control/RD/dataset/
+    # --out_path_Lidar2Proj
+    # .../Road-Detection-and-Vehicle-Control/LIDAR/outputs/Lidar2Proj/
+    # --out_path_Lidar2FV
+    # .../Road-Detection-and-Vehicle-Control/LIDAR/outputs/Lidar2FV/
+    if not os.path.exists(args.out_path_Lidar2Proj):
+        os.makedirs(args.out_path_Lidar2Proj)
+    if not os.path.exists(args.out_path_Lidar2FV):
+        os.makedirs(args.out_path_Lidar2Proj)
     print('- Original Lidar Sources are from: %s' % args.data_path)
-    print('- Lidar2image results will be saved at: %s' % args.out_path_Lidar2img)
+    print('- Lidar2image results will be saved at: %s' % args.out_path_Lidar2Proj)
     print('- Lidar2FV results will be saved at: %s' % args.out_path_Lidar2FV)
     # Calib File
     CALIB = args.data_path+"training/calib/"
@@ -30,7 +39,7 @@ def main():
     IMG_PATH = args.data_path+"training/image_2/"
     LIDAR_PATH = args.data_path+"training/velodyne/"
     # Save File
-    SIMG_PATH = args.out_path_Lidar2img
+    SIMG_PATH = args.out_path_Lidar2Proj
     # Batch Process
     #-----------------------------------IMG_Process------------------------------------------------------------
     time_cost = []
@@ -87,6 +96,8 @@ def main():
         generate_FV(pointcloud, VRES, HRES, VFOV, val, cmap, savepath, Y_FUDGE)
         end_time = time.time()
         time_cost.append(end_time - start_time)
+
+
     print("Mean_time_cost:", np.mean(time_cost))
     print('all samples were processed')
 
