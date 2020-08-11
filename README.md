@@ -32,5 +32,6 @@ LORD
 ##### Updat log:06/12/2020
 * Upload Lidar2image tools (in `LIDAR`)
 
-###
+##### Updat log:08/11/2020
+* Finish Lidar2image tools (in `LIDAR`)
 
