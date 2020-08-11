@@ -18,7 +18,6 @@ def main():
     args.data_path='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/dataset/'
     args.out_path_Lidar2img='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2img/'
     args.out_path_Lidar2FV = '/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2FV/'
-    args.type='FV'
     print('- Original Lidar Sources are from: %s' % args.data_path)
     print('- Lidar2image results will be saved at: %s' % args.out_path_Lidar2img)
     print('- Lidar2FV results will be saved at: %s' % args.out_path_Lidar2FV)
@@ -32,8 +31,8 @@ def main():
     LIDAR_PATH = args.data_path+"training/velodyne/"
     # Save File
     SIMG_PATH = args.out_path_Lidar2img
-    #-----------------------------------IMG_Process------------------------------------------------------------
     # Batch Process
+    #-----------------------------------IMG_Process------------------------------------------------------------
     time_cost = []
     for img_path in tqdm(find_files(IMG_PATH, '*.png')):
         _, img_name = os.path.split(img_path)
