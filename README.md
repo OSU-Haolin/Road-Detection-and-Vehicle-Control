@@ -23,15 +23,17 @@ RD
  |    |    |---- calib
 ```
 
-##### Update log:06/06/2020
+#### Update Log
+
+##### 06/06/2020
 * Revised evaluation tools (in `devkit_road` (from http://www.cvlibs.net/datasets/kitti/eval_road.php))
 
-##### Update log:06/10/2020
+##### 06/10/2020
 * Upload segmentation models (in `RD`)
 
-##### Update log:06/12/2020
+##### 06/12/2020
 * Upload Lidar2image tools (in `LIDAR`)
 
-##### Update log:08/11/2020
+##### 08/11/2020
 * Finish Lidar2image tools (in `LIDAR`)
 
