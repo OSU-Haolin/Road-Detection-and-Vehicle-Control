@@ -3,7 +3,7 @@
 #### Department of Electrical and Computer Engineering, The Ohio State University
 ##### Latest version:08/11/2020
 
-#### Dataset Setup
+#### 1.Dataset Setup
 
 Please setup dataset according to the following folder structure:
 ```
@@ -22,8 +22,11 @@ RD
  |    |    |---- velodyne
  |    |    |---- calib
 ```
+#### 2.Instruction
 
-#### Update Log
+#### 3.Demo
+
+#### 4.Update Log
 
 ##### 06/06/2020
 * Revised evaluation tools (in `devkit_road` (from http://www.cvlibs.net/datasets/kitti/eval_road.php))
