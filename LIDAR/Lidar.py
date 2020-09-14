@@ -5,27 +5,38 @@ import numpy as np
 from function import show_img, find_files, cal_proj_matrix, load_img, load_lidar, project_lidar2img, generate_FV
 from pca_norm import PCA, get_pca_o3d, get_surface_normals, get_surface_normals_o3d, norm_create
 from tqdm import tqdm
-import argparse as args
+import argparse
 
 
 def main():
     # parsing arguments
-    # argparser = argparse.ArgumentParser(description='Lidar2image')
-    # argparser.add_argument('--data_path', required=True, help='path to the data dir. See README for detail.')
-    # argparser.add_argument('--out_path_Lidar2img', required=True, help='path of image output')
-    # argparser.add_argument('--out_path_Lidar2FV', required=True, help='path of frontview output')
-    # argparser.add_argument('--out_path_Surface_normal', required=True, help='path of surface normals output')
+    args = argparse.ArgumentParser(description='Lidar2image')
+    args.add_argument('--data_path', required=True, help='path to the data dir. See README for detail.')
+    args.add_argument('--out_path_Lidar2img', required=True, help='path of image output')
+    args.add_argument('--out_path_Lidar2FV', required=True, help='path of frontview output')
+    args.add_argument('--out_path_Surface_normal', required=True, help='path of surface normals output')
 
     # argparser.add_argument('--type', required=True, help='Type of Lidar representation.choose: proj, FV, etc')
-    # args = argparser.parse_args()
     args.data_path='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/dataset/'
     args.out_path_Lidar2img='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2img/'
     args.out_path_Lidar2FV = '/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2FV/'
     args.out_path_Surface_normal='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/SURFACE/outputs/'
+    
+    #############defaut path refer##############
+    # --data_path
+    # .../Road-Detection-and-Vehicle-Control/RD/dataset/
+    # --out_path_Lidar2Proj
+    # .../Road-Detection-and-Vehicle-Control/LIDAR/outputs/Lidar2Proj/
+    # --out_path_Lidar2FV
+    # .../Road-Detection-and-Vehicle-Control/LIDAR/outputs/Lidar2FV/
+    if not os.path.exists(args.out_path_Lidar2img):
+        os.makedirs(args.out_path_Lidar2img)
+    if not os.path.exists(args.out_path_Lidar2FV):
+        os.makedirs(args.out_path_Lidar2FV)
     print('- Original Lidar Sources are from: %s' % args.data_path)
     print('- Lidar2image results will be saved at: %s' % args.out_path_Lidar2img)
     print('- Lidar2FV results will be saved at: %s' % args.out_path_Lidar2FV)
-    print('- Lidar2FV results will be saved at: %s' % args.out_path_Surface_normal)
+    print('- Surface Normals results will be saved at: %s' % args.out_path_Surface_normal)
     # Calib File
     CALIB = args.data_path+"training/calib/"
     # # ################# PARAMETER ####################
@@ -37,6 +48,7 @@ def main():
     # Save File
     SIMG_PATH = args.out_path_Lidar2img
     SNORM_PATH=args.out_path_Surface_normal
+
     # Batch Process
     #-----------------------------------IMG_Process------------------------------------------------------------
     time_cost = []
@@ -94,6 +106,8 @@ def main():
         generate_FV(pointcloud, VRES, HRES, VFOV, val, cmap, savepath, Y_FUDGE)
         end_time = time.time()
         time_cost.append(end_time - start_time)
+
+
     print("Mean_time_cost:", np.mean(time_cost))
     
     # -----------------------Surface normals Process--------------------------------------------------------------
