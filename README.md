@@ -17,10 +17,16 @@ RD
  |    |    |---- gt_image_2
  |    |    |---- velodyne
  |    |    |---- calib
+ |    |    |---- image_2_proj
+ |    |    |---- image_2_sn
+ |    |    |---- image_2_ADT
  |    |---- testing
  |    |    |---- image_2
  |    |    |---- velodyne
  |    |    |---- calib
+ |    |    |---- image_2_proj
+ |    |    |---- image_2_sn
+ |    |    |---- image_2_ADT
 ```
 #### 2.Instruction
 Waiting for update...
