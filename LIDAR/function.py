@@ -22,6 +22,7 @@ def show_img(name, img):
     """
     cv2.namedWindow(name, 0)
     cv2.imshow(name, img)
+    cv2.waitKey(0)
 
 
 def find_files(directory, pattern):
