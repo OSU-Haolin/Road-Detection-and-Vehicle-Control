@@ -20,7 +20,7 @@ def main():
     args.data_path='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/dataset/'
     args.out_path_Lidar2img='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2img/'
     args.out_path_Lidar2FV = '/home/lx/program/LORD-Lidar-Orientated-Road-Detection/outputs/Lidar2FV/'
-    args.out_path_Surface_normal='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/SURFACE/outputs/'
+    args.out_path_Surface_normal='/home/lx/program/LORD-Lidar-Orientated-Road-Detection/SURFACE/'
     
     #############defaut path refer##############
     # --data_path
@@ -51,78 +51,80 @@ def main():
 
     # Batch Process
     #-----------------------------------IMG_Process------------------------------------------------------------
-    time_cost = []
-    for img_path in tqdm(find_files(IMG_PATH, '*.png')):
-        _, img_name = os.path.split(img_path)
-        pc_path = LIDAR_PATH + img_name[:-4] + '.bin'
-        calib_path = CALIB + img_name[:-4] + '.txt'
-    # print ("Working on", img_name[:-4])
-        start_time = time.time()
+    # time_cost = []
+    # for img_path in tqdm(find_files(IMG_PATH, '*.png')):
+    #     _, img_name = os.path.split(img_path)
+    #     pc_path = LIDAR_PATH + img_name[:-4] + '.bin'
+    #     calib_path = CALIB + img_name[:-4] + '.txt'
+    # # print ("Working on", img_name[:-4])
+    #     start_time = time.time()
+    # #
+    # #     # Load img & pc
+    #     img = load_img(img_path)
+    #     pc = load_lidar(pc_path)
+    #     pc_distance = pc.copy()
+    #     if flag == 'x':
+    # 	    pass
+    #     elif flag == 'xy':
+    #         pc_distance[..., 0] = np.sqrt(pc[..., 0] ** 2 + pc[..., 1] ** 2)
+    #     elif flag == 'xyz':
+    #         pc_distance[..., 0] = np.sqrt(pc[..., 0] ** 2 + pc[..., 1] ** 2 + pc[..., 2] ** 2)
     #
-    #     # Load img & pc
-        img = load_img(img_path)
-        pc = load_lidar(pc_path)
-        pc_distance = pc.copy()
-        if flag == 'x':
-    	    pass
-        elif flag == 'xy':
-            pc_distance[..., 0] = np.sqrt(pc[..., 0] ** 2 + pc[..., 1] ** 2)
-        elif flag == 'xyz':
-            pc_distance[..., 0] = np.sqrt(pc[..., 0] ** 2 + pc[..., 1] ** 2 + pc[..., 2] ** 2)
-
-        # Project & Generate Image & Save
-        p_matrix = cal_proj_matrix(calib_path, CAM_ID)
-        points = project_lidar2img(img, pc_distance, p_matrix)
-
-        pcimg = img.copy()
-        depth_max = np.max(pc_distance[:, 0])
-        for idx, i in enumerate(points):
-            color = int((pc_distance[idx, 0] / depth_max) * 255)
-            # cv2.rectangle(pcimg, (int(i[0]-1),int(i[1]-1)), (int(i[0]+1),int(i[1]+1)), (0, 0, color), -1)
-            cv2.circle(pcimg, (int(i[0]), int(i[1])), 1, (0, 0, color), -1)
-        cv2.imwrite(SIMG_PATH + img_name, pcimg)
-        end_time = time.time()
-        time_cost.append(end_time - start_time)
-
-    print("Mean_time_cost:", np.mean(time_cost))
-    cv2.destroyAllWindows()
+    #     # Project & Generate Image & Save
+    #     p_matrix = cal_proj_matrix(calib_path, CAM_ID)
+    #     points = project_lidar2img(img, pc_distance, p_matrix)
+    #
+    #     pcimg = img.copy()
+    #     depth_max = np.max(pc_distance[:, 0])
+    #     for idx, i in enumerate(points):
+    #         color = int((pc_distance[idx, 0] / depth_max) * 255)
+    #         # cv2.rectangle(pcimg, (int(i[0]-1),int(i[1]-1)), (int(i[0]+1),int(i[1]+1)), (0, 0, color), -1)
+    #         cv2.circle(pcimg, (int(i[0]), int(i[1])), 1, (0, 0, color), -1)
+    #     cv2.imwrite(SIMG_PATH + img_name, pcimg)
+    #     end_time = time.time()
+    #     time_cost.append(end_time - start_time)
+    #
+    # print("Mean_time_cost:", np.mean(time_cost))
+    # cv2.destroyAllWindows()
 
     # -----------------------FV Process---------------------------------------------------------------------------
-    time_cost=[]
-    HRES = 0.35  # horizontal resolution (assuming 20Hz setting)
-    VRES = 0.4  # vertical res
-    VFOV = (-24.9, 2.0)  # Field of view (-ve, +ve) along vertical axis
-    val = 'depth'
-    cmap = 'jet'
-    Y_FUDGE = 5  # y fudge factor for velodyne HDL 64E
-    for img_path in tqdm(find_files(IMG_PATH, '*.png')):
-        _, img_name = os.path.split(img_path)
-        pc_path = LIDAR_PATH + img_name[:-4] + '.bin'
-        # print ("Working on", img_name[:-4])
-        start_time = time.time()
-        savepath = args.out_path_Lidar2FV + img_name
-        path_temp = args.data_path + 'training/velodyne/' + img_name[:-4] + '.bin'
-        pointcloud = np.fromfile(path_temp, dtype=np.float32, count=-1).reshape([-1, 4])
-        generate_FV(pointcloud, VRES, HRES, VFOV, val, cmap, savepath, Y_FUDGE)
-        end_time = time.time()
-        time_cost.append(end_time - start_time)
-
-
-    print("Mean_time_cost:", np.mean(time_cost))
+    # time_cost=[]
+    # HRES = 0.35  # horizontal resolution (assuming 20Hz setting)
+    # VRES = 0.4  # vertical res
+    # VFOV = (-24.9, 2.0)  # Field of view (-ve, +ve) along vertical axis
+    # val = 'depth'
+    # cmap = 'jet'
+    # Y_FUDGE = 5  # y fudge factor for velodyne HDL 64E
+    # for img_path in tqdm(find_files(IMG_PATH, '*.png')):
+    #     _, img_name = os.path.split(img_path)
+    #     pc_path = LIDAR_PATH + img_name[:-4] + '.bin'
+    #     # print ("Working on", img_name[:-4])
+    #     start_time = time.time()
+    #     savepath = args.out_path_Lidar2FV + img_name
+    #     path_temp = args.data_path + 'training/velodyne/' + img_name[:-4] + '.bin'
+    #     pointcloud = np.fromfile(path_temp, dtype=np.float32, count=-1).reshape([-1, 4])
+    #     generate_FV(pointcloud, VRES, HRES, VFOV, val, cmap, savepath, Y_FUDGE)
+    #     end_time = time.time()
+    #     time_cost.append(end_time - start_time)
+    #
+    #
+    # print("Mean_time_cost:", np.mean(time_cost))
     
     # -----------------------Surface normals Process--------------------------------------------------------------
     time_cost=[]
-    zeros = np.zeros([375, 1242])
-    cv2.imwrite("./1.png", zeros)
-    img = cv2.imread("./1.png")
+
     for img_path in tqdm(find_files(IMG_PATH, '*.png')):
         _, img_name = os.path.split(img_path)
         pc_path = LIDAR_PATH + img_name[:-4] + '.bin'
         calib_path = CALIB + img_name[:-4] + '.txt'
         # print ("Working on", img_name[:-4])
-        img1=img.copy()
         start_time=time.time()
-
+        img_template=cv2.imread(img_path)
+        (r,c,num)=img_template.shape
+        zeros = np.zeros([r,c])
+        cv2.imwrite("./1.png", zeros)
+        img = cv2.imread("./1.png")
+        img1 = img.copy()
         norm_create(pc_path)
         rawdata=np.load("./surface_norm.npy").reshape([6,-1])
         lidar_points=rawdata[:3,:]
@@ -145,12 +147,16 @@ def main():
             color2 = int(((normal_vector[idx, 4] - v_min[4]) / range_y) * 255)
             color3 = int(((normal_vector[idx, 5] - v_min[5]) / range_z) * 255)
     # cv2.rectangle(pcimg, (int(i[0]-1),int(i[1]-1)), (int(i[0]+1),int(i[1]+1)), (0, 0, color), -1)
-    #     cv2.circle(pcimg, (int(i[0]), int(i[1])), 1, (color1, color2, color3), -1)
-            if(int(i[1])<375 and int(i[0])<1242 and int(i[1])>=0 and int(i[0])>=0):
+            if(int(i[1])<r and int(i[0])<c and int(i[1])>=0 and int(i[0])>=0):
                 pcimg[int(i[1]),int(i[0]),0]=color1
                 pcimg[int(i[1]),int(i[0]),1]=color2
                 pcimg[int(i[1]),int(i[0]),2]=color3
-        cv2.imwrite(SNORM_PATH + img_name, pcimg)
+                cv2.circle(img_template, (int(i[0]), int(i[1])), 1, (color1, color2, color3), -1)
+
+        cv2.imwrite(SNORM_PATH + 'outputs/' + img_name, pcimg)
+        img_gray=cv2.cvtColor(pcimg,cv2.COLOR_BGR2GRAY)
+        cv2.imwrite(SNORM_PATH + 'outputs_gray/' + img_name, img_gray)
+        cv2.imwrite(SNORM_PATH + 'outputs_proj/' + img_name, img_template)
         end_time = time.time()
         time_cost.append(end_time - start_time)
     print("Mean_time_cost:", np.mean(time_cost))
