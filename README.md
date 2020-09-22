@@ -29,7 +29,17 @@ RD
  |    |    |---- image_2_ADT
 ```
 #### 2. Instruction
-Waiting for update...
+##### Evaluation
+Open the `simpleExample_evalTrainResults.py`
+Revise the `line 29-30` to your own data path
+e.g 
+    datasetDir = '/home/RD/'
+    outputDir = '/home/RD/result'
+According to the above example paths, your data should be put in following paths:
+Your ground truth images should be in '/home/RD/training/gt_imge_2'
+Your ouput results should be in '/home/RD/result/baseline_perspective_train'
+Then run the `simpleExample_evalTrainResults.py` (in python 2.7) and the evaluation scores will be printed
+
 
 #### 3. Demo
 Waiting for update...
