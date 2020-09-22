@@ -30,15 +30,15 @@ RD
 ```
 #### 2. Instruction
 ##### Evaluation
-Open the `simpleExample_evalTrainResults.py`
-Revise the `line 29-30` to your own data path
-e.g 
-    datasetDir = '/home/RD/'
-    outputDir = '/home/RD/result'
-According to the above example paths, your data should be put in following paths:
-Your ground truth images should be in '/home/RD/training/gt_imge_2'
-Your ouput results should be in '/home/RD/result/baseline_perspective_train'
-Then run the `simpleExample_evalTrainResults.py` (in python 2.7) and the evaluation scores will be printed
+Open the `simpleExample_evalTrainResults.py`<br>
+Revise the `line 29-30` to your own data path<br>
+e.g <br>
+    `datasetDir = '/home/RD/'`<br>
+    `outputDir = '/home/RD/result'`<br>
+According to the above example paths, your data should be put in following paths:<br>
+Your ground truth images should be in `'/home/RD/training/gt_imge_2'`
+Your ouput results should be in `'/home/RD/result/baseline_perspective_train'`<br>
+Then run the `simpleExample_evalTrainResults.py` (in python 2.7) and the evaluation scores will be printed<br>
 
 
 #### 3. Demo
